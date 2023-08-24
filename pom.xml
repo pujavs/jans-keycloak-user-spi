@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 	<groupId>io.jans</groupId>
 	<artifactId>jans-keycloak-user-spi</artifactId>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<version>1.0.17-SNAPSHOT</version>
 	<name>jans-keycloak-user-spi</name>  
 
@@ -38,174 +38,115 @@
 	</distributionManagement>
 	
 	
-	<properties>
-		<maven.min-version>3.3.9</maven.min-version>
-		<compiler-plugin.version>3.11.0</compiler-plugin.version>
-		<maven.compiler.parameters>true</maven.compiler.parameters>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+	 <dependencies>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-server-spi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-model-legacy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
-		<jans.version>${project.version}</jans.version>
-		<jackson.version>2.13.2</jackson.version>		
-		<rest-assured.version>5.0.1</rest-assured.version>
-		<keycloak.version>20.0.0</keycloak.version>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.dasniko</groupId>
+            <artifactId>testcontainers-keycloak</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>jans-keycloak-user-spi</finalName>
+        
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.json</include>
+					<include>META-INF/services/*.*</include>
+				</includes>
+			</resource>
+		</resources>
 		
-		<!--<sonar.projectKey>JanssenProject_jans-keycloak-user-spi</sonar.projectKey>
-		<sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-		<sonar.organization>janssenproject</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>-->
-		
-	</properties>
-
-	<prerequisites>
-		<maven>${maven.min-version}</maven>
-	</prerequisites>
-
-
-	<repositories>
-		<repository>
-			<id>mavencentral</id>
-			<name>maven central</name>
-			<url>https://repo1.maven.org/maven2</url>
-		</repository>
-		<repository>
-			<id>jans</id>
-			<name>Janssen project repository</name>
-			<url>https://maven.jans.io/maven</url>
-		</repository>
-		<repository>
-			<id>bouncycastle</id>
-			<name>Bouncy Castle</name>
-			<url>https://repo1.maven.org/maven2/org/bouncycastle</url>
-		</repository>
-		<repository>
-			<id>repository.jboss.org</id>
-			<name>JBoss Repository</name>
-			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-		</repository>
-	</repositories>
-
-	<!--<scm>
-		<url>https://github.com/JanssenProject/jans-keycloak-user-spi</url>
-		<connection>scm:git:git://github.com/JanssenProject/jans-keycloak-user-spi</connection>
-		<developerConnection>scm:git:git@github.com:v/jans-keycloak-user-spi</developerConnection>
-	</scm>-->
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>io.jans</groupId>
-				<artifactId>jans-bom</artifactId>
-				<version>${jans.version}</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-			<dependency>
-                <groupId>com.github.dasniko</groupId>
-                <artifactId>keycloak-spi-bom</artifactId>
-                <version>${keycloak.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-		</dependencies>
-	</dependencyManagement>
-		
-<dependencies>
-			<!-- jans dependencies -->
-			<dependency>
-				<groupId>io.jans</groupId>
-				<artifactId>jans-auth-common</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.jans</groupId>
-				<artifactId>jans-config-api-server</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.jans</groupId>
-				<artifactId>jans-config-api-shared</artifactId>
-				<version>${jans.version}</version>
-			</dependency>
-			
-
-			<!-- Others -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-collections4</artifactId>
-				<version>4.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.json</groupId>
-				<artifactId>json</artifactId>
-				<version>20230227</version>
-			</dependency>
-			
-            
-		</dependencies>
-
-
-	<build>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.2.0</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${compiler-plugin.version}</version>
-					<configuration>
-						<forceJavacCompilerUse>true</forceJavacCompilerUse>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>3.1.1</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<version>3.5.0</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>3.1.1</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.3.0</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.3.1</version>
-					<configuration>
-						<encoding>UTF-8</encoding>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>4.0.0-M7</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>${surefire-plugin.version}</version>
-				</plugin>
-				
-			</plugins>
-
-	
-	</build>
-
+		 
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler.version}</version>
+                <configuration>
+                    <release>${maven-compiler.release}</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+	                <archive>
+		                <manifest>
+		                <addClasspath>true</addClasspath>
+		                <classpathPrefix>libs/</classpathPrefix>
+			                
+		                </manifest>
+	                </archive>
+                </configuration>
+            </plugin>
+            	<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+					</systemPropertyVariables>
+					<excludedGroups>integration</excludedGroups>
+					<systemProperties>
+						<karate.options>--tags ~@ignore</karate.options>
+					</systemProperties>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-tests</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<configuration>
+							<failIfNoTests>false</failIfNoTests>
+							<excludedGroups>!integration</excludedGroups>
+							<groups>integration</groups>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+        </plugins>
+    </build>
 	
 </project>
