@@ -9,7 +9,6 @@ import io.jans.as.common.model.common.User;
 import io.jans.orm.search.filter.Filter;
 
 import java.io.IOException;
-import javax.ws.rs.PathParam;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

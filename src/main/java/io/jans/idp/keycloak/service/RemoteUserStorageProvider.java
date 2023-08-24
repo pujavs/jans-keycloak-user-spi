@@ -37,6 +37,7 @@ public class RemoteUserStorageProvider implements UserLookupProvider, UserStorag
     public RemoteUserStorageProvider(KeycloakSession session, ComponentModel model,
             UsersApiLegacyService usersService) {
         LOG.debug(" session:{}, model:{}, usersService:{}", session, model, usersService);
+        System.out.println(" session:{"+session+"+}, model:{"+model+"}, usersService:{"+usersService+"}" );
 
         this.session = session;
         this.model = model;
