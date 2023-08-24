@@ -30,6 +30,7 @@ public class RemoteUserStorageProviderFactory implements UserStorageProviderFact
     @Override
     public RemoteUserStorageProvider create(KeycloakSession session, ComponentModel model) {
         LOG.debug("session:{}, model:{}",session, model);
+        System.out.println("RemoteUserStorageProvider::create()- session = "+session+" ,model = "+model );
         return new RemoteUserStorageProvider(session, model, new UsersApiLegacyService(session));
     }
     
@@ -37,6 +38,7 @@ public class RemoteUserStorageProviderFactory implements UserStorageProviderFact
     public String getId() {
         String id = PROVIDER_NAME;
         LOG.debug("id:{}",id);
+        System.out.println("id = "+id);
         return id;
     }
 

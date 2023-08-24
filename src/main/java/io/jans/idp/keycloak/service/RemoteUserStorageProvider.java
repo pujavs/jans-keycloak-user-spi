@@ -49,6 +49,7 @@ public class RemoteUserStorageProvider implements UserLookupProvider, UserStorag
      */
     public UserModel getUserById(RealmModel paramRealmModel, String id) {
         LOG.debug("getUserById() paramRealmModel:{}, id:{}", paramRealmModel, id);
+        System.out.println("getUserById() using paramRealmModel = "+paramRealmModel+" , id="+id);
         UserModel userModel = null;
         try {
         	User user = usersService.getUserById(id);
@@ -60,9 +61,12 @@ public class RemoteUserStorageProvider implements UserLookupProvider, UserStorag
             }
          
             LOG.debug("User fetched with id:{} from external service is:{}", id, user);
+            System.out.println("getUserById()- User fetched with id ="+id+" from external service is="+user );
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             LOG.error("Error fetching user id:{} from external service is:{} - {} ", id, ex.getMessage(), ex);
+            System.out.println("getUserById()- Error fetching user id ="+id+" from external service is ="+ex );
         }
         return userModel;
     }
@@ -72,12 +76,16 @@ public class RemoteUserStorageProvider implements UserLookupProvider, UserStorag
      */
     public UserModel getUserByUsername(RealmModel paramRealmModel, String name) {
         LOG.debug("getUserByUsername() paramRealmModel:{}, name:{}", paramRealmModel, name);
+        System.out.println("getUserByUsername()- using paramRealmModel = "+paramRealmModel+" name = "+name );
         UserModel userModel = null;
         try {
         	User user = usersService.getUserByName(name);
             LOG.debug("User fetched with name:{} from external service is:{}", name, user);
+            System.out.println("getUserByUsername()- with name = "+name+" from external service is = "+user );
         } catch (Exception ex) {
-            LOG.error("Error fetching user name:{}, from external service is:{} -{} ", name, ex.getMessage(), ex);
+            ex.printStackTrace();
+            LOG.error("Error fetching user name:{}, from external service is:{} - {} ", name, ex.getMessage(), ex);
+            System.out.println("getUserById()- Error fetching user name ="+name+" from external service is ="+ex );
         }
         return userModel;
     }

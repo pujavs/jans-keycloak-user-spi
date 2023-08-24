@@ -24,16 +24,19 @@ public class UsersApiLegacyService {
     
     public UsersApiLegacyService(KeycloakSession session) {
         LOG.debug(" session:{}", session);
-        
+        System.out.println("session = "+session);
         this.session = session;
     }
     
     public User getUserById(String inum) {
         LOG.debug(" inum:{}", inum);
+        System.out.println("inum = "+inum);
         try {
             return SimpleHttp.doGet(AUTH_USER_ENDPOINT + inum, this.session).asJson(User.class);
         } catch (Exception ex) {
-            LOG.debug("Error fetching user based on inum:{} from external service is:{} - {} ", inum, ex.getMessage(), ex);
+            ex.printStackTrace();
+            LOG.error("Error fetching user based on inum:{} from external service is:{} - {} ", inum, ex.getMessage(), ex);
+            System.out.println("Error fetching user based on inum="+inum+" from external service is->"+ex);
         }
         return null;
     }
@@ -43,7 +46,9 @@ public class UsersApiLegacyService {
         try {
             return SimpleHttp.doGet(AUTH_USER_ENDPOINT + username, this.session).asJson(User.class);
         } catch (Exception ex) {
+            ex.printStackTrace();
             LOG.debug("Error fetching user based on username:{} from external service is:{} - {} ", username, ex.getMessage(), ex);
+            System.out.println("Error fetching user based on username="+username+" from external service is->"+ex);
         }
         return null;
     }
@@ -53,7 +58,9 @@ public class UsersApiLegacyService {
         try {
             return SimpleHttp.doGet(AUTH_USER_ENDPOINT + email, this.session).asJson(User.class);
         } catch (Exception ex) {
+            ex.printStackTrace();
             LOG.error("Error fetching user based on email:{} from external service is:{} - {} ", email, ex.getMessage(), ex);
+            System.out.println("Error fetching user based on email="+email+" from external service is->"+ex);
         }
         return null;
     }
