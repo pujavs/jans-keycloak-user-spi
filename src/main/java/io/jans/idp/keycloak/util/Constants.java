@@ -4,7 +4,7 @@
  * Copyright (c) 2020, Janssen Project
  */
 
-package io.jans.configapi.plugin.keycloak.util;
+package io.jans.idp.keycloak.util;
 
 public class Constants {
 

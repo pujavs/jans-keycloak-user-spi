@@ -1,4 +1,4 @@
-package io.jans.configapi.plugin.keycloak.service;
+package io.jans.idp.keycloak.service;
 
 //import io.jans.configapi.plugin.mgt.model.user.CustomUser;
 import io.jans.as.common.model.common.User;

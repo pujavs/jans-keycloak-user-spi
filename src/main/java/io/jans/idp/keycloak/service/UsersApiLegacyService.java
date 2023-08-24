@@ -1,4 +1,4 @@
-package io.jans.configapi.plugin.keycloak.service;
+package io.jans.idp.keycloak.service;
 
 import org.keycloak.broker.provider.util.SimpleHttp;
 import org.keycloak.models.KeycloakSession;
@@ -25,6 +25,7 @@ public class UsersApiLegacyService {
     
     public UsersApiLegacyService(KeycloakSession session) {
         LOG.debug(" session:{}", session);
+        
         this.session = session;
     }
     
