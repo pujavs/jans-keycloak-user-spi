@@ -4,7 +4,8 @@ import org.keycloak.broker.provider.util.SimpleHttp;
 import org.keycloak.models.KeycloakSession;
 
 import io.jans.as.common.util.AttributeConstants;
-import io.jans.configapi.plugin.mgt.model.user.CustomUser;
+import io.jans.as.common.model.common.User;
+//import io.jans.configapi.plugin.mgt.model.user.CustomUser;
 import io.jans.orm.search.filter.Filter;
 
 import java.io.IOException;
@@ -27,30 +28,30 @@ public class UsersApiLegacyService {
         this.session = session;
     }
     
-    public CustomUser getUserById(String inum) {
+    public User getUserById(String inum) {
         LOG.debug(" inum:{}", inum);
         try {
-            return SimpleHttp.doGet(AUTH_USER_ENDPOINT + inum, this.session).asJson(CustomUser.class);
+            return SimpleHttp.doGet(AUTH_USER_ENDPOINT + inum, this.session).asJson(User.class);
         } catch (Exception ex) {
             LOG.debug("Error fetching user based on inum:{} from external service is:{} - {} ", inum, ex.getMessage(), ex);
         }
         return null;
     }
         
-    public CustomUser getUserByName(String username) {
+    public User getUserByName(String username) {
         LOG.debug(" username:{}", username);
         try {
-            return SimpleHttp.doGet(AUTH_USER_ENDPOINT + username, this.session).asJson(CustomUser.class);
+            return SimpleHttp.doGet(AUTH_USER_ENDPOINT + username, this.session).asJson(User.class);
         } catch (Exception ex) {
             LOG.debug("Error fetching user based on username:{} from external service is:{} - {} ", username, ex.getMessage(), ex);
         }
         return null;
     }
     
-    public CustomUser getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         LOG.debug(" email:{}", email);
         try {
-            return SimpleHttp.doGet(AUTH_USER_ENDPOINT + email, this.session).asJson(CustomUser.class);
+            return SimpleHttp.doGet(AUTH_USER_ENDPOINT + email, this.session).asJson(User.class);
         } catch (Exception ex) {
             LOG.error("Error fetching user based on email:{} from external service is:{} - {} ", email, ex.getMessage(), ex);
         }

@@ -1,6 +1,7 @@
 package io.jans.configapi.plugin.keycloak.service;
 
-import io.jans.configapi.plugin.mgt.model.user.CustomUser;
+//import io.jans.configapi.plugin.mgt.model.user.CustomUser;
+import io.jans.as.common.model.common.User;
 import org.keycloak.common.util.MultivaluedHashMap;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.credential.LegacyUserCredentialManager;
@@ -21,9 +22,9 @@ import org.apache.commons.lang.StringUtils;
 
 public class UserAdapter extends AbstractUserAdapter {
 
-    private final CustomUser user;
+    private final User user;
 
-    public UserAdapter(KeycloakSession session, RealmModel realm, ComponentModel model, CustomUser user) {
+    public UserAdapter(KeycloakSession session, RealmModel realm, ComponentModel model, User user) {
         super(session, realm, model);
         this.storageId = new StorageId(storageProviderModel.getId(), user.getUserId());
         this.user = user;
@@ -31,7 +32,7 @@ public class UserAdapter extends AbstractUserAdapter {
 
     @Override
     public String getUsername() {
-        return user.getGivenName();
+        return user.getAttribute("givenName");
     }
 
     @Override
@@ -57,8 +58,8 @@ public class UserAdapter extends AbstractUserAdapter {
     @Override
     public boolean isEnabled() {
         boolean enabled = false;
-        if(StringUtils.isNotBlank(user.getJansStatus())){
-            enabled =  user.getJansStatus().equalsIgnoreCase("active")?true:false;
+        if(user!=null && StringUtils.isNotBlank(user.getAttribute("jansStatus"))){
+            enabled =  user.getAttribute("jansStatus").equalsIgnoreCase("active")?true:false;
         }
         return enabled;
     }

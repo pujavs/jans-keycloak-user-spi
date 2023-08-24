@@ -1,6 +1,7 @@
 package io.jans.configapi.plugin.keycloak.service;
 
-import io.jans.configapi.plugin.mgt.model.user.CustomUser;
+//import io.jans.configapi.plugin.mgt.model.user.CustomUser;
+import io.jans.as.common.model.common.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,7 +50,7 @@ public class RemoteUserStorageProvider implements UserLookupProvider, UserStorag
         LOG.debug("getUserById() paramRealmModel:{}, id:{}", paramRealmModel, id);
         UserModel userModel = null;
         try {
-            CustomUser user = usersService.getUserById(id);
+        	User user = usersService.getUserById(id);
             if (user != null) {
                 userModel = createUserModel(paramRealmModel, user);
                 System.out.println("New UserModel:");
@@ -72,7 +73,7 @@ public class RemoteUserStorageProvider implements UserLookupProvider, UserStorag
         LOG.debug("getUserByUsername() paramRealmModel:{}, name:{}", paramRealmModel, name);
         UserModel userModel = null;
         try {
-            CustomUser user = usersService.getUserByName(name);
+        	User user = usersService.getUserByName(name);
             LOG.debug("User fetched with name:{} from external service is:{}", name, user);
         } catch (Exception ex) {
             LOG.error("Error fetching user name:{}, from external service is:{} -{} ", name, ex.getMessage(), ex);
@@ -87,7 +88,7 @@ public class RemoteUserStorageProvider implements UserLookupProvider, UserStorag
     public void close() {
     }
 
-    private UserModel createUserModel(RealmModel realm, CustomUser user) {
+    private UserModel createUserModel(RealmModel realm, User user) {
         return new UserAdapter(session, realm, model, user);
     }
 }
