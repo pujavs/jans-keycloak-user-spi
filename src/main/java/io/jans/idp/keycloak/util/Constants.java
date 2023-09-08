@@ -11,6 +11,9 @@ public class Constants {
     private Constants() {}
 
     public static final String KEYCLOAK_USER = "/keycloak-user";
-    
+    public static final String BASE_URL = "https://localhost";
+    public static final String AUTH_USERNAME = "user";
+    public static final String AUTH_PASSWORD = "pwd";
+    public static final String AUTH_TOKEN = "pwd";
     
 }

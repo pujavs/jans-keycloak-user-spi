@@ -32,34 +32,34 @@ public class RemoteUserStorageProviderFactory implements UserStorageProviderFact
        
     @Override
     public RemoteUserStorageProvider create(KeycloakSession session, ComponentModel model) {
-        LOG.debug("\n\n\n RemoteUserStorageProviderFactory::create() - session:{}, model:{}",session, model);
+        LOG.error("\n\n\n RemoteUserStorageProviderFactory::create() - session:{}, model:{}",session, model);
         System.out.println("\n\n\n ** RemoteUserStorageProvider::create()- session = "+session+" ,model = "+model );
-        return new RemoteUserStorageProvider(session, model, new UsersApiLegacyService(session));
+        return new RemoteUserStorageProvider(session, model);
     }
     
     @Override
     public String getId() {
         String id = PROVIDER_NAME;
-        LOG.debug("id:{}",id);
+        LOG.error("id:{}",id);
         System.out.println("id = "+id);
         return id;
     }
     
     @Override
     public void init(Config.Scope config) {
-        LOG.debug("\n\n\n RemoteUserStorageProviderFactory::init() - config:{}",config);
+        LOG.error("\n\n\n RemoteUserStorageProviderFactory::init() - config:{}",config);
         System.out.println("\n\n\n ** RemoteUserStorageProvider::init()- config = "+config );
     }
 
     @Override
     public void postInit(KeycloakSessionFactory factory) {
-        LOG.debug("\n\n\n RemoteUserStorageProviderFactory::postInit() - config:{}",factory);
+        LOG.error("\n\n\n RemoteUserStorageProviderFactory::postInit() - config:{}",factory);
         System.out.println("\n\n\n ** RemoteUserStorageProvider::postInit()- config = "+factory );
     }
 
     @Override
     public void close() {
-        LOG.debug("\n\n\n RemoteUserStorageProviderFactory::close() - Exit:{}");
+        LOG.error("\n\n\n RemoteUserStorageProviderFactory::close() - Exit:{}");
         System.out.println("\n\n\n ** RemoteUserStorageProvider::close()- **" );
     }
 
